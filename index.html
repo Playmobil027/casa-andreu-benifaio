@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Andreu · Comida para llevar en Benifaió</title>
+<meta name="description" content="Casa Andreu, comida casera para llevar en Benifaió: menú de la semana a 5 €, paella valenciana todos los días y paellas en caldero por encargo.">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Kaushan+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rojo:#C81E22;
+  --amarillo:#F8B858;
+  --amarillo-claro:#FBD58F;
+  --marron:#8D5F47;
+  --marron-osc:#3E261C;
+  --papel:#F4EEE0;
+  --blanco:#FFFDF8;
+  --tinta:#1B1512;
+  --f-cartel:'Anton','Arial Narrow',sans-serif;
+  --f-mano:'Kaushan Script',cursive;
+  --f-texto:'Schibsted Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+body{font-family:var(--f-texto);font-size:17px;line-height:1.55;color:var(--tinta);background:var(--papel);padding-bottom:76px;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:3px}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.edit{}
+body.ver-editables .edit{outline:2px dashed #d4007a;outline-offset:2px;background:rgba(255,230,0,.45)}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:48px;padding:.7em 1.3em;font:800 1rem/1.1 var(--f-texto);text-decoration:none;border:3px solid var(--tinta);background:var(--amarillo);color:var(--tinta);cursor:pointer;transition:transform .12s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--tinta)}
+.btn.rojo{background:var(--rojo);color:#fff;border-color:var(--tinta)}
+.btn.papel{background:var(--blanco)}
+.btn.wa{background:#1FA855;color:#fff}
+
+/* cabecera */
+.top{background:var(--marron);position:sticky;top:0;z-index:30;border-bottom:3px solid var(--marron-osc)}
+.top .wrap{display:flex;align-items:center;gap:16px;min-height:64px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--blanco);font:400 1.5rem/1 var(--f-cartel);letter-spacing:.02em;text-transform:uppercase}
+.marca img{width:44px;height:44px;border-radius:50%}
+.top nav{margin-left:auto;display:none;gap:22px}
+.top nav a{color:var(--blanco);font-weight:700;text-decoration:none;font-size:.95rem}
+.top nav a:hover{color:var(--amarillo)}
+.top .btn{margin-left:auto;min-height:42px;padding:.4em 1em;font-size:.95rem;box-shadow:none}
+@media(min-width:860px){.top nav{display:flex}.top .btn{margin-left:0}}
+
+/* hero */
+.hero{background:var(--marron);color:var(--blanco);position:relative;overflow:hidden;padding:36px 0 70px}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(0,0,0,.04) 0 2px,transparent 2px 14px);pointer-events:none}
+.hero .wrap{position:relative;display:grid;gap:34px}
+.hero h1{font:400 clamp(4.2rem,19vw,10.5rem)/.86 var(--f-cartel);text-transform:uppercase;letter-spacing:.005em;color:var(--blanco)}
+.hero h1 span{display:block;font:400 clamp(1.3rem,5vw,2.2rem)/1.1 var(--f-cartel);color:var(--amarillo);margin-top:.6rem;letter-spacing:.04em}
+.lema{font:400 clamp(2.1rem,8.5vw,4.4rem)/1 var(--f-mano);color:var(--amarillo);transform:rotate(-3deg);margin:14px 0 6px;display:inline-block}
+.hero p.dato{max-width:30ch;color:#F1E6D6;font-size:1.05rem}
+.folio{background:var(--papel);color:var(--tinta);padding:22px 20px 20px;max-width:360px;position:relative;transform:rotate(1.8deg);box-shadow:0 10px 0 rgba(0,0,0,.18)}
+.folio::before,.folio::after{content:"";position:absolute;top:-12px;width:72px;height:24px;background:rgba(248,184,88,.85);transform:rotate(-6deg)}
+.folio::before{left:18px}.folio::after{right:18px;transform:rotate(5deg)}
+.folio .estado{display:flex;gap:10px;align-items:center;font-weight:800;font-size:1.05rem;line-height:1.2}
+.folio .punto{width:14px;height:14px;border-radius:50%;background:#999;flex:none}
+.folio .estado.abierto .punto{background:#1FA855;box-shadow:0 0 0 4px rgba(31,168,85,.25)}
+.folio .estado.cerrado .punto{background:var(--rojo)}
+.folio dl{margin:14px 0 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:.98rem}
+.folio dt{font-weight:800}
+.folio .acciones{display:grid;gap:10px}
+.polas{position:relative;height:340px;margin-top:6px}
+.pol{position:absolute;background:var(--blanco);padding:8px 8px 28px;box-shadow:0 8px 0 rgba(0,0,0,.2)}
+.pol img{width:100%;height:100%;object-fit:cover}
+.pol.a{width:176px;height:208px;left:2%;top:10px;transform:rotate(-5deg)}
+.pol.b{width:190px;height:230px;left:34%;top:56px;transform:rotate(3deg);z-index:2}
+.pol.c{width:150px;height:176px;right:0;top:0;transform:rotate(7deg)}
+.pol.d{width:140px;height:132px;left:12%;bottom:0;transform:rotate(4deg);z-index:3}
+@media(min-width:900px){
+  .hero{padding:56px 0 96px}
+  .hero .wrap{grid-template-columns:1.25fr 1fr;gap:30px;align-items:start}
+  .folio{grid-column:2;grid-row:1;margin-left:auto;margin-top:10px}
+  .hero .izq{grid-column:1;grid-row:1}
+  .polas{grid-column:1 / -1;height:300px;margin-top:-40px}
+  .pol.a{width:220px;height:260px;left:0;top:20px}
+  .pol.b{width:250px;height:300px;left:26%;top:0}
+  .pol.c{width:190px;height:226px;left:52%;right:auto;top:38px}
+  .pol.d{width:180px;height:170px;left:72%;top:80px;bottom:auto}
+}
+
+/* banda */
+.banda{background:var(--amarillo);border-block:3px solid var(--tinta)}
+.banda .wrap{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.banda div{padding:16px 10px;border-right:2px solid var(--tinta);border-bottom:2px solid var(--tinta);text-align:left}
+.banda div:nth-child(2n){border-right:0}
+.banda div:nth-last-child(-n+2){border-bottom:0}
+.banda b{display:block;font:400 2.1rem/1 var(--f-cartel);color:var(--rojo)}
+.banda span{font-weight:700;font-size:.95rem;line-height:1.2;display:block;margin-top:4px}
+@media(min-width:760px){.banda .wrap{grid-template-columns:repeat(4,1fr)}.banda div{border-bottom:0;padding:20px 18px}.banda div:nth-child(2n){border-right:2px solid var(--tinta)}.banda div:last-child{border-right:0}}
+
+/* menú */
+.menu{padding:64px 0 70px;background:var(--papel)}
+.menu .cabeza{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 22px;margin-bottom:26px}
+.menu h2{font:400 clamp(3rem,13vw,6.6rem)/.9 var(--f-cartel);color:var(--rojo);text-transform:uppercase}
+.menu .cabeza p{font:400 clamp(1.5rem,5vw,2.2rem)/1.05 var(--f-mano);color:var(--marron);transform:rotate(-2deg)}
+.menu-grid{display:grid;gap:26px}
+.hoja{background:var(--blanco);border:2px solid var(--tinta);padding:20px 16px 8px;box-shadow:8px 8px 0 var(--tinta);position:relative}
+.dia{padding:12px 0 14px;border-bottom:2px dashed #c9bfae;position:relative}
+.dia:last-child{border-bottom:0}
+.dia h3{font:italic 800 1.1rem/1 var(--f-texto);color:var(--rojo);text-decoration:underline;text-underline-offset:4px;text-transform:uppercase;display:inline-block;padding:3px 6px;margin-left:-6px}
+.dia ul{list-style:none;padding:0;margin-top:8px}
+.dia li{display:flex;align-items:baseline;gap:6px;font-weight:600;line-height:1.25;padding:3px 0}
+.dia li::after{content:"";order:1;flex:1;min-width:14px;border-bottom:2px dotted #8c7f6e;transform:translateY(-4px)}
+.dia li b{order:2;font-weight:800;white-space:nowrap}
+.dia.cerrado p{margin-top:8px;font-weight:700}
+.dia.hoy h3{background:var(--amarillo);text-decoration:none;padding:3px 10px}
+.dia .sello{display:none}
+.dia.hoy .sello{display:block;position:absolute;right:0;top:8px;font:400 1.5rem/1 var(--f-cartel);color:var(--rojo);border:3px solid var(--rojo);padding:4px 10px 2px;transform:rotate(7deg);letter-spacing:.06em}
+.lateral{display:grid;gap:18px;align-content:start}
+.caja{border:3px solid var(--tinta);background:var(--blanco);padding:16px 16px 14px}
+.caja h3{font:400 1.7rem/1 var(--f-cartel);text-transform:uppercase;color:var(--rojo);margin-bottom:4px}
+.caja small{display:block;font-weight:600;color:#5b4d40;margin-bottom:8px}
+.caja ul{padding-left:18px;columns:1}
+.caja li{padding:1px 0}
+.caja.recogida{background:var(--amarillo)}
+.caja.recogida strong{font:400 2.2rem/1 var(--f-cartel);display:block;margin:2px 0}
+.caja.recogida .cierra{display:inline-block;background:var(--tinta);color:var(--amarillo);font:400 1.3rem/1 var(--f-cartel);padding:6px 12px 4px;margin-top:8px}
+.nota{margin-top:20px;font-size:.95rem;color:#5b4d40;max-width:60ch}
+@media(min-width:900px){
+  .menu-grid{grid-template-columns:1.55fr 1fr;gap:44px;align-items:start}
+  .hoja{padding:28px 30px 12px;display:grid;grid-template-columns:1fr 1fr;column-gap:34px}
+  .dia{border-bottom:2px dashed #c9bfae}
+  .dia:last-child{border-bottom:0}
+  .dia:nth-last-child(2){border-bottom:0}
+  .lateral{margin-top:26px}
+}
+
+/* caldero */
+.caldero{background:var(--marron-osc);color:var(--blanco);padding:70px 0 0;position:relative}
+.caldero .wrap{display:grid;gap:30px}
+.caldero h2{font:400 clamp(2.7rem,11vw,5.6rem)/.92 var(--f-cartel);text-transform:uppercase}
+.caldero h2 em{font:400 .5em/1 var(--f-mano);text-transform:none;color:var(--amarillo);display:block;margin-top:10px;transform:rotate(-2deg)}
+.caldero p{color:#EBDDCB;max-width:44ch}
+.tarifa{list-style:none;padding:0;margin:20px 0 22px;border-top:3px solid var(--amarillo)}
+.tarifa li{display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:2px solid rgba(255,255,255,.18);font:400 1.55rem/1.1 var(--f-cartel);text-transform:uppercase;letter-spacing:.02em}
+.tarifa li::after{content:"";order:1;flex:1;border-bottom:3px dotted rgba(255,255,255,.4)}
+.tarifa li b{order:2;font-weight:400;color:var(--amarillo)}
+.tarifa small{font:500 .8rem var(--f-texto);text-transform:none;color:#CDBBA6;letter-spacing:0;margin-left:6px}
+.caldero .fotos{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:end}
+.caldero .fotos img{width:100%;object-fit:cover;border:6px solid var(--blanco);box-shadow:0 8px 0 rgba(0,0,0,.3)}
+.caldero .fotos .f1{height:340px;transform:rotate(-2.5deg) translateY(30px)}
+.caldero .fotos .f2{height:260px;transform:rotate(3deg) translate(-14px,60px)}
+@media(min-width:900px){
+  .caldero .wrap{grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .caldero{padding-bottom:0}
+  .caldero .fotos .f1{height:440px}.caldero .fotos .f2{height:340px}
+}
+.caldero .cola{height:60px}
+
+/* galería */
+.galeria{padding:90px 0 70px;background:var(--papel)}
+.galeria h2{font:400 clamp(2.4rem,9vw,4.6rem)/.95 var(--f-cartel);text-transform:uppercase;max-width:14ch}
+.galeria h2 span{color:var(--rojo)}
+.mosaico{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:70px;gap:10px;margin:28px 0}
+.mosaico figure{margin:0;overflow:hidden;border:3px solid var(--tinta);background:var(--blanco)}
+.mosaico img{width:100%;height:100%;object-fit:cover}
+.m1{grid-column:1 / 5;grid-row:span 4}
+.m2{grid-column:5 / 7;grid-row:span 3}
+.m3{grid-column:1 / 3;grid-row:span 3}
+.m4{grid-column:3 / 5;grid-row:span 3}
+.m5{grid-column:5 / 7;grid-row:span 3}
+.m6{grid-column:1 / 4;grid-row:span 3}
+.m7{grid-column:4 / 7;grid-row:span 3}
+@media(min-width:800px){.mosaico{grid-auto-rows:92px}}
+.redes{display:flex;flex-wrap:wrap;gap:12px}
+
+/* reseñas */
+.resenas{background:var(--amarillo);padding:70px 0 80px;border-block:3px solid var(--tinta)}
+.resenas .cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 22px;margin-bottom:34px}
+.resenas h2{font:400 clamp(2.4rem,9vw,4.4rem)/.95 var(--f-cartel);text-transform:uppercase}
+.resenas .cab p{font-weight:800}
+.notas{display:grid;gap:30px}
+.nota-r{background:var(--blanco);padding:26px 22px 20px;position:relative;box-shadow:0 8px 0 rgba(0,0,0,.18)}
+.nota-r::before{content:"";position:absolute;top:-13px;left:50%;width:84px;height:26px;margin-left:-42px;background:rgba(200,30,34,.75);transform:rotate(-3deg)}
+.nota-r:nth-child(1){transform:rotate(-1.4deg)}
+.nota-r:nth-child(2){transform:rotate(1.2deg)}
+.nota-r:nth-child(3){transform:rotate(-.6deg);background:var(--papel)}
+.nota-r blockquote{font:400 1.55rem/1.3 var(--f-mano)}
+.nota-r.larga blockquote{font-size:1.2rem}
+.nota-r cite{display:block;margin-top:12px;font:700 .85rem var(--f-texto);font-style:normal;color:#5b4d40}
+@media(min-width:900px){.notas{grid-template-columns:1fr 1.2fr 1fr;align-items:center}.nota-r:nth-child(2){margin-top:34px}}
+
+/* tienda */
+.tienda{padding:80px 0;background:var(--papel)}
+.tienda .wrap{display:grid;gap:44px}
+.tienda h2{font:400 clamp(2.6rem,10vw,5rem)/.92 var(--f-cartel);text-transform:uppercase}
+.tienda h2 span{display:block;font:400 .46em/1.1 var(--f-mano);text-transform:none;color:var(--marron);margin-top:8px;transform:rotate(-2deg)}
+.fachada{position:relative}
+.fachada .grande{border:3px solid var(--tinta);box-shadow:10px 10px 0 var(--marron);max-height:560px;width:100%;object-fit:cover;object-position:center 30%}
+.fachada .pegado{position:absolute;width:120px;border:5px solid var(--blanco);box-shadow:0 6px 0 rgba(0,0,0,.25);right:-6px;bottom:-26px;transform:rotate(5deg)}
+.fachada .pegado.dos{right:auto;left:-6px;bottom:-30px;transform:rotate(-4deg);width:96px}
+.pasos{list-style:none;padding:0;margin:26px 0 0;counter-reset:p;display:grid;gap:14px}
+.pasos li{counter-increment:p;display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:start;font-weight:600}
+.pasos li::before{content:counter(p);font:400 2.6rem/1 var(--f-cartel);color:var(--rojo);text-align:center;border:3px solid var(--rojo);padding:6px 0 2px}
+.pasos b{display:block;font-weight:800;font-size:1.1rem}
+.datos{display:grid;gap:22px;align-content:start}
+table.horario{width:100%;border-collapse:collapse;font-weight:600;background:var(--blanco);border:3px solid var(--tinta)}
+table.horario td{padding:9px 12px;border-bottom:2px solid #d8cfbf}
+table.horario td:last-child{text-align:right;font-weight:800}
+table.horario tr:last-child td{border-bottom:0}
+table.horario tr.hoy td{background:var(--amarillo)}
+table.horario tr.cierre td{color:var(--rojo)}
+.direccion{font-size:1.15rem;font-weight:700;line-height:1.35}
+.mapa{border:3px solid var(--tinta);height:280px;width:100%;background:#e8e1d1}
+.mapa iframe{width:100%;height:100%;border:0}
+.wabig{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#1FA855;color:#fff;padding:20px 22px;text-decoration:none;border:3px solid var(--tinta);box-shadow:7px 7px 0 var(--tinta);font-weight:700}
+.wabig strong{font:400 2rem/1 var(--f-cartel);text-transform:uppercase;letter-spacing:.02em}
+@media(min-width:900px){.tienda .wrap{grid-template-columns:1fr 1fr;gap:64px;align-items:start}}
+
+/* franja dueño */
+.dueno{background:#202020;color:#eee;padding:44px 0 56px;border-top:6px dashed #ff3d8b}
+.dueno .aviso{display:inline-block;background:#ff3d8b;color:#111;font-weight:800;padding:6px 12px;font-size:.9rem;margin-bottom:18px}
+.dueno h2{font:800 1.7rem/1.15 var(--f-texto);margin-bottom:20px;max-width:30ch}
+.dueno ul{list-style:none;padding:0;display:grid;gap:14px;margin-bottom:26px}
+.dueno li{padding-left:16px;border-left:4px solid #ff3d8b}
+.dueno li b{display:block}
+.dueno button{font:800 1rem var(--f-texto);padding:.8em 1.2em;background:#ff3d8b;border:0;color:#111;cursor:pointer;min-height:48px}
+@media(min-width:800px){.dueno ul{grid-template-columns:1fr 1fr;gap:20px 40px}}
+
+/* pie */
+footer{background:var(--tinta);color:#e9dfd0;padding:36px 0 40px;font-size:.95rem}
+footer .wrap{display:grid;gap:18px}
+footer .marca{font-size:1.4rem}
+footer a{color:var(--amarillo)}
+footer .legal{display:flex;flex-wrap:wrap;gap:6px 18px;color:#b8ab99}
+
+/* barra móvil */
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:1fr 1.4fr;gap:0;background:var(--tinta);border-top:3px solid var(--tinta)}
+.barra a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:60px;font-weight:800;text-decoration:none;color:var(--tinta);background:var(--amarillo);font-size:1.05rem}
+.barra a.wa{background:#1FA855;color:#fff}
+@media(min-width:900px){.barra{display:none}body{padding-bottom:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="img/logo.jpg" alt="" width="44" height="44">Casa Andreu</a>
+    <nav aria-label="Principal">
+      <a href="#menu">Menú de la semana</a>
+      <a href="#caldero">Paellas por encargo</a>
+      <a href="#resenas">Opiniones</a>
+      <a href="#tienda">Cómo recoger</a>
+    </nav>
+    <a class="btn" href="tel:+34961781001">Llamar</a>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero">
+  <div class="wrap">
+    <div class="izq">
+      <h1>Casa Andreu<span>Comida para llevar en Benifaió</span></h1>
+      <p class="lema">Ca Andreu es lo meu!!</p>
+      <p class="dato">Lo bueno es tradición. Paella valenciana todos los días y el menú de la semana a 5 € la ración.</p>
+    </div>
+    <aside class="folio" aria-label="Horario de hoy">
+      <p class="estado" id="estado"><span class="punto"></span><span id="estado-txt">Comprobando horario…</span></p>
+      <dl>
+        <dt>Martes a domingo</dt><dd>9:00 a 15:00</dd>
+        <dt>Recogida</dt><dd class="edit">12:00 a 15:00</dd>
+        <dt>Lunes</dt><dd>cerrado</dd>
+      </dl>
+      <div class="acciones">
+        <a class="btn rojo" href="tel:+34961781001">Llamar al 961 78 10 01</a>
+        <a class="btn wa edit" href="https://wa.me/34643848257?text=Hola%2C%20quiero%20reservar%20para%20recoger%20en%20Casa%20Andreu" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+      </div>
+    </aside>
+    <div class="polas" aria-hidden="false">
+      <div class="pol a"><img src="img/paella-bandeja.jpg" alt="Paella valenciana en bandeja de aluminio con pollo, conejo y garrofón"></div>
+      <div class="pol b"><img src="img/portada-albondigas.jpg" alt="Albóndigas con verdura en salsa"></div>
+      <div class="pol c"><img src="img/pechuga-empanada.jpg" alt="Pechuga empanada con patatas fritas"></div>
+      <div class="pol d"><img src="img/portada-ensalada.jpg" alt="Ensalada con atún, huevo cocido y tomate"></div>
+    </div>
+  </div>
+</section>
+
+<section class="banda" aria-label="Datos de Casa Andreu">
+  <div class="wrap">
+    <div><b>4,7</b><span>en Google con 59 reseñas</span></div>
+    <div><b class="edit">5 €</b><span>la ración del menú, casi todo</span></div>
+    <div><b>Cada día</b><span>paella valenciana y pollo asado al horno</span></div>
+    <div><b>Mar a dom</b><span>de 9:00 a 15:00, los lunes cerramos</span></div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="cabeza">
+      <h2>Menú de la semana</h2>
+      <p>cambia cada semana</p>
+    </div>
+    <div class="menu-grid">
+      <div class="hoja edit" aria-label="Menú de la semana">
+        <article class="dia" data-dia="2">
+          <h3>Martes</h3><span class="sello">Hoy</span>
+          <ul>
+            <li>Merluza rebozada con verdura o patatas<b>5,00 €</b></li>
+            <li>1/4 de pollo asado al horno<b>5,00 €</b></li>
+            <li>Paella valenciana<b>5,00 €</b></li>
+          </ul>
+        </article>
+        <article class="dia" data-dia="3">
+          <h3>Miércoles</h3><span class="sello">Hoy</span>
+          <ul>
+            <li>Pechuga empanada con patatas fritas<b>5,00 €</b></li>
+            <li>Arroz al horno<b>5,00 €</b></li>
+            <li>1/4 de pollo asado al horno<b>5,00 €</b></li>
+            <li>Paella valenciana<b>5,00 €</b></li>
+          </ul>
+        </article>
+        <article class="dia" data-dia="4">
+          <h3>Jueves</h3><span class="sello">Hoy</span>
+          <ul>
+            <li>Merluza vizcaína<b>6,00 €</b></li>
+            <li>Fideuá de marisco<b>5,00 €</b></li>
+            <li>1/4 de pollo asado al horno<b>5,00 €</b></li>
+            <li>1/2 de pollo asado al horno<b>6,50 €</b></li>
+            <li>Pollo entero asado al horno<b>12,00 €</b></li>
+            <li>Paella de habas y alcachofas<b>5,00 €</b></li>
+          </ul>
+        </article>
+        <article class="dia" data-dia="5">
+          <h3>Viernes</h3><span class="sello">Hoy</span>
+          <ul>
+            <li>Lasaña de carne gratinada<b>5,00 €</b></li>
+            <li>Paella de puchero<b>5,00 €</b></li>
+            <li>1/4 de pollo asado al horno<b>5,00 €</b></li>
+            <li>Paella valenciana<b>5,00 €</b></li>
+          </ul>
+        </article>
+        <article class="dia" data-dia="6">
+          <h3>Sábado</h3><span class="sello">Hoy</span>
+          <ul>
+            <li>Fideuá de marisco<b>5,00 €</b></li>
+            <li>Macarrones boloñesa gratinados<b>4,70 €</b></li>
+            <li>1/4 de pollo asado al horno<b>5,00 €</b></li>
+            <li>Paella valenciana<b>5,00 €</b></li>
+          </ul>
+        </article>
+        <article class="dia" data-dia="0">
+          <h3>Domingo</h3><span class="sello">Hoy</span>
+          <ul>
+            <li>1/4 de pollo asado al horno<b>5,00 €</b></li>
+            <li>Paella valenciana<b>5,00 €</b></li>
+          </ul>
+        </article>
+        <article class="dia cerrado" data-dia="1">
+          <h3>Lunes</h3><span class="sello">Hoy</span>
+          <p>Cerrado.</p>
+        </article>
+      </div>
+
+      <div class="lateral">
+        <section class="caja">
+          <h3>Platos en vitrina</h3>
+          <small>según temporada</small>
+          <ul class="edit">
+            <li>Ensaladilla rusa y ensalada de pasta</li>
+            <li>Huevos rellenos</li>
+            <li>Verdura asada y calabaza asada</li>
+            <li>Croquetas de bacalao</li>
+            <li>Salpicón de marisco</li>
+            <li>Tequeños de queso y empanada venezolana</li>
+            <li>Postres y tartas</li>
+          </ul>
+        </section>
+        <section class="caja recogida">
+          <h3>Horario de recogida</h3>
+          <strong class="edit">12:00 a 15:00</strong>
+          <span class="cierra">Lunes cerrado</span>
+        </section>
+        <section class="caja">
+          <h3>Haz tu reserva</h3>
+          <small class="edit">Mejor antes de las 12:00, para que no te quedes sin tu plato.</small>
+          <a class="btn rojo" href="tel:+34961781001">Llamar al 961 78 10 01</a>
+        </section>
+      </div>
+    </div>
+    <p class="nota edit">Esta semana de ejemplo está sacada de los menús que publican en su Facebook. En la web definitiva se actualiza cada semana con el menú real.</p>
+  </div>
+</section>
+
+<section class="caldero" id="caldero">
+  <div class="wrap">
+    <div>
+      <h2>Paella en caldero<em>por encargo, para toda la mesa</em></h2>
+      <ul class="tarifa edit">
+        <li>Paella valenciana<b>7,00 € <small>ración</small></b></li>
+        <li>Arroz negro<b>7,00 € <small>ración</small></b></li>
+        <li>Paella marisquera<b>9,00 € <small>ración</small></b></li>
+        <li>Arroz del señoret<b>9,00 € <small>ración</small></b></li>
+      </ul>
+      <p class="edit">Mínimo 5 raciones y reservando con antelación. Hay más arroces fuera del menú: pregunta por el que quieras.</p>
+      <p style="margin-top:20px"><a class="btn wa edit" href="https://wa.me/34643848257?text=Hola%2C%20quiero%20encargar%20una%20paella%20en%20caldero%20en%20Casa%20Andreu" target="_blank" rel="noopener">Encargar un caldero</a></p>
+    </div>
+    <div class="fotos">
+      <img class="f1" src="img/paella-bogavante.jpg" alt="Paella con bogavante y gambas en el caldero">
+      <img class="f2" src="img/portada-arroz.jpg" alt="Arroz amarillo en bandeja de aluminio">
+    </div>
+  </div>
+  <div class="cola"></div>
+</section>
+
+<section class="galeria" id="galeria">
+  <div class="wrap">
+    <h2>Hecho con <span>amor</span>, servido en bandeja</h2>
+    <div class="mosaico">
+      <figure class="m1"><img src="img/macarrones-gamba.jpg" alt="Macarrones con una gamba encima" loading="lazy"></figure>
+      <figure class="m2"><img src="img/portada-pollo.jpg" alt="Pollo frito dorado en la cesta de la freidora" loading="lazy"></figure>
+      <figure class="m3"><img src="img/tarta.jpg" alt="Trozo de tarta de chocolate y frutos secos" loading="lazy"></figure>
+      <figure class="m4"><img src="img/pechuga-empanada.jpg" alt="Pechuga empanada con patatas" loading="lazy"></figure>
+      <figure class="m5"><img src="img/portada-albondigas.jpg" alt="Albóndigas con verduras" loading="lazy"></figure>
+    </div>
+    <div class="redes">
+      <a class="btn" href="https://www.instagram.com/casaandreu.vlc/" target="_blank" rel="noopener">Síguenos en Instagram</a>
+      <a class="btn papel" href="https://www.facebook.com/casaandreuvlc" target="_blank" rel="noopener">El menú, en Facebook</a>
+    </div>
+  </div>
+</section>
+
+<section class="resenas" id="resenas">
+  <div class="wrap">
+    <div class="cab"><h2>Lo dicen en Google</h2><p>4,7 de media, 59 opiniones</p></div>
+    <div class="notas">
+      <figure class="nota-r"><blockquote>“Encargue una paella y un arroz del senyoret y espectacular!”</blockquote><cite>Reseñas de Google</cite></figure>
+      <figure class="nota-r larga"><blockquote>“Encargué una paella para una celebración y estuvo genial. También he probado ración de fideua, pollo empanado y tarta vegana y flan de coco. Todo muy bueno. Comida hecha con amor. El local muy limpio. Seguiré probando todos sus platos.”</blockquote><cite>Reseñas de Google</cite></figure>
+      <figure class="nota-r"><blockquote>“Menú variado cada día, me quedan platos por probar😁, Voy a repetir seguro.”</blockquote><cite>Reseñas de Google</cite></figure>
+    </div>
+  </div>
+</section>
+
+<section class="tienda" id="tienda">
+  <div class="wrap">
+    <div>
+      <h2>Pasa a por ella<span>Juan Ramón Jiménez, 32</span></h2>
+      <div class="fachada" style="margin-top:34px">
+        <img class="grande" src="img/fachada.jpg" alt="Fachada de Casa Andreu: rótulo naranja con el lema Lo bueno es tradición y pizarra en la puerta" loading="lazy">
+        <img class="pegado" src="img/cocinero.jpg" alt="Figura de un cocinero sosteniendo el menú" loading="lazy">
+        <img class="pegado dos" src="img/azulejo.jpg" alt="Panel de azulejos valencianos" loading="lazy">
+      </div>
+      <ol class="pasos" style="margin-top:56px">
+        <li><span><b>Mira el menú</b>Aquí arriba o en su Facebook, cambia cada semana.</span></li>
+        <li><span><b>Llama o escribe</b><span class="edit">Reserva antes de las 12:00 y te lo dejan preparado.</span></span></li>
+        <li><span><b>Pasa a recogerlo</b><span class="edit">De 12:00 a 15:00, de martes a domingo.</span></span></li>
+      </ol>
+    </div>
+    <div class="datos">
+      <table class="horario" aria-label="Horario">
+        <tr data-dia="2"><td>Martes</td><td>9:00 a 15:00</td></tr>
+        <tr data-dia="3"><td>Miércoles</td><td>9:00 a 15:00</td></tr>
+        <tr data-dia="4"><td>Jueves</td><td>9:00 a 15:00</td></tr>
+        <tr data-dia="5"><td>Viernes</td><td>9:00 a 15:00</td></tr>
+        <tr data-dia="6"><td>Sábado</td><td>9:00 a 15:00</td></tr>
+        <tr data-dia="0"><td>Domingo</td><td>9:00 a 15:00</td></tr>
+        <tr data-dia="1" class="cierre"><td>Lunes</td><td>Cerrado</td></tr>
+      </table>
+      <p class="direccion">Carrer Juan Ramón Jiménez, 32<br>46450 Benifaió, Valencia<br><a href="tel:+34961781001">961 78 10 01</a></p>
+      <div class="mapa"><iframe title="Mapa de Casa Andreu en Benifaió" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Carrer%20Juan%20Ram%C3%B3n%20Jim%C3%A9nez%2032%2C%2046450%20Benifai%C3%B3&amp;output=embed"></iframe></div>
+      <a class="wabig edit" href="https://wa.me/34643848257?text=Hola%2C%20quiero%20reservar%20para%20recoger%20en%20Casa%20Andreu" target="_blank" rel="noopener"><strong>Escríbenos por WhatsApp</strong>Reserva tu ración o tu caldero</a>
+    </div>
+  </div>
+</section>
+
+<section class="dueno" aria-label="Franja para el dueño">
+  <div class="wrap">
+    <span class="aviso">Esta franja no aparece en la web publicada</span>
+    <h2>Lo que esta web hace por Casa Andreu</h2>
+    <ul>
+      <li><b>Reservas directas, sin intermediarios.</b>Los pedidos de raciones y calderos llegan por teléfono o WhatsApp, sin comisión.</li>
+      <li><b>Salir cuando buscan en Google.</b>Quien busque "comida para llevar en Benifaió" o "paella por encargo en Benifaió" encuentra el menú y el botón de llamar.</li>
+      <li><b>El menú de cada semana, en un minuto.</b>Hoy vive en fotos de Facebook; aquí se actualiza fácil y se ve el día de hoy resaltado.</li>
+      <li><b>Un 4,7 con 59 reseñas que se ve.</b>Su valoración de Google presentada con una imagen cuidada, junto al horario y el mapa.</li>
+    </ul>
+    <button type="button" id="resaltar">Resaltar datos a confirmar</button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="img/logo.jpg" alt="" width="44" height="44">Casa Andreu</a>
+    <p>Carrer Juan Ramón Jiménez, 32, 46450 Benifaió. Tel. <a href="tel:+34961781001">961 78 10 01</a>. Martes a domingo de 9:00 a 15:00.</p>
+    <p><a href="https://www.instagram.com/casaandreu.vlc/" target="_blank" rel="noopener">Instagram @casaandreu.vlc</a> &nbsp; <a href="https://www.facebook.com/casaandreuvlc" target="_blank" rel="noopener">Facebook</a></p>
+    <p class="legal"><span>Aviso legal</span><span>Privacidad</span><span>Cookies</span><span>Las fotos son provisionales.</span></p>
+  </div>
+</footer>
+
+<nav class="barra" aria-label="Acciones rápidas">
+  <a href="tel:+34961781001">Llamar</a>
+  <a class="wa" href="https://wa.me/34643848257?text=Hola%2C%20quiero%20reservar%20para%20recoger%20en%20Casa%20Andreu" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+</nav>
+
+<script>
+(function(){
+  var f=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Madrid',weekday:'short',hour:'numeric',minute:'numeric',hour12:false});
+  var p={};f.formatToParts(new Date()).forEach(function(x){p[x.type]=x.value});
+  var mapa={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  var d=mapa[p.weekday],h=parseInt(p.hour,10)%24,m=parseInt(p.minute,10),min=h*60+m;
+  var abre=9*60,cierra=15*60,txt,cls;
+  var nombres=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  function hora(x){return Math.floor(x/60)+':'+('0'+(x%60)).slice(-2)}
+  if(d===1){txt='Hoy cerrado. Abrimos mañana, martes, a las 9:00.';cls='cerrado'}
+  else if(min>=abre&&min<cierra){txt='Abierto ahora, hasta las 15:00.';cls='abierto'}
+  else if(min<abre){txt='Abrimos hoy a las 9:00.';cls='cerrado'}
+  else{var sig=(d+1)%7;txt=sig===1?'Cerrado. Abrimos el martes a las 9:00.':'Cerrado. Abrimos mañana a las 9:00.';cls='cerrado'}
+  var e=document.getElementById('estado');e.className='estado '+cls;document.getElementById('estado-txt').textContent=txt;
+  document.querySelectorAll('[data-dia]').forEach(function(el){if(parseInt(el.getAttribute('data-dia'),10)===d)el.classList.add('hoy')});
+  document.getElementById('resaltar').addEventListener('click',function(){document.body.classList.toggle('ver-editables')});
+})();
+</script>
+</body>
+</html>
